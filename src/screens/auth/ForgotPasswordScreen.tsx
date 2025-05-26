@@ -1,0 +1,88 @@
+import React, { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { useTheme } from '@/hooks/useTheme';
+import { Button } from '@/components/common/Button';
+import { AuthService } from '@/services/firebase/auth';
+
+export default function ForgotPasswordScreen() {
+  const navigation = useNavigation();
+  const { theme } = useTheme();
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const handleResetPassword = async () => {
+    if (!email) {
+      Alert.alert('Error', 'Please enter your email address');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await AuthService.resetPassword(email);
+      setSent(true);
+      setTimeout(() => navigation.goBack(), 3000);
+    } catch (error) {
+      Alert.alert('Error', 'Failed to send reset email');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={styles.content}>
+        <Text style={[styles.title, { color: theme.colors.text }]}>Reset Password</Text>
+        <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
+          {sent 
+            ? 'Check your email for reset instructions'
+            : 'Enter your email to reset password'
+          }
+        </Text>
+
+        {!sent ? (
+          <View style={styles.form}>
+            <TextInput
+              style={[styles.input, { 
+                backgroundColor: theme.colors.surface,
+                borderColor: theme.colors.border,
+                color: theme.colors.text 
+              }]}
+              placeholder="Email"
+              placeholderTextColor={theme.colors.textSecondary}
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+
+            <Button
+              title="Send Reset Link"
+              onPress={handleResetPassword}
+              loading={loading}
+              style={styles.resetButton}
+            />
+
+            <Button
+              title="Back to Login"
+              onPress={() => navigation.goBack()}
+              variant="outline"
+              style={styles.backButton}
+            />
+          </View>
+        ) : (
+          <View style={styles.successContainer}>
+            <Text style={[styles.successText, { color: theme.colors.success }]}>
+              ✓ Reset email sent successfully
+            </Text>
+            <Text style={[styles.redirectText, { color: theme.colors.textSecondary }]}>
+              Redirecting to login...
+            </Text>
+          </View>
+        )}
+      </View>
+    </SafeAreaView>
+  );
+}
