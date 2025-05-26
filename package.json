@@ -1,17 +1,12 @@
 {
   "name": "spendy-app",
   "version": "1.0.0",
-  "main": "expo-router/entry",
+  "main": "index.ts",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
+    "android": "expo start --android", 
     "ios": "expo start --ios",
-    "web": "expo start --web",
-    "build": "eas build",
-    "submit": "eas submit",
-    "test": "jest",
-    "lint": "eslint .",
-    "type-check": "tsc --noEmit"
+    "web": "expo start --web"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.4",

@@ -86,3 +86,53 @@ export default function ForgotPasswordScreen() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+    padding: 24,
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    marginBottom: 32,
+    textAlign: 'center',
+  },
+  form: {
+    gap: 16,
+  },
+  input: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    fontSize: 16,
+  },
+  resetButton: {
+    marginTop: 8,
+  },
+  backButton: {
+    marginTop: 8,
+  },
+  successContainer: {
+    alignItems: 'center',
+    marginTop: 32,
+  },
+  successText: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 8,
+  },
+  redirectText: {
+    fontSize: 16,
+  },
+});

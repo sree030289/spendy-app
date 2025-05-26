@@ -307,9 +307,6 @@ const styles = StyleSheet.create({
     gap: 12,
     width: '100%',
   },
-  biometricButton: {
-    flex: 1,
-  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',

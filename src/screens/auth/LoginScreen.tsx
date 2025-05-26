@@ -143,3 +143,55 @@ export default function LoginScreen() {
     </SafeAreaView>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+    padding: 24,
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    marginBottom: 32,
+    textAlign: 'center',
+  },
+  form: {
+    gap: 16,
+  },
+  input: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    fontSize: 16,
+  },
+  loginButton: {
+    marginTop: 8,
+  },
+  biometricButton: {
+    marginTop: 8,
+  },
+  forgotPassword: {
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  forgotPasswordText: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  registerLink: {
+    alignItems: 'center',
+    marginTop: 24,
+  },
+  registerLinkText: {
+    fontSize: 16,
+  },
+});

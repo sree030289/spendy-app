@@ -10,7 +10,6 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import CountryPicker, { Country } from 'react-native-country-picker-modal';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@/hooks/useTheme';
 import { useAuth } from '@/hooks/useAuth';
@@ -65,36 +64,38 @@ export default function RegisterScreen() {
   };
 
   const BiometricPrompt = () => (
-    <View style={[styles.modal, { backgroundColor: theme.colors.background }]}>
-      <View style={styles.biometricContent}>
-        <Ionicons name="finger-print" size={64} color={theme.colors.primary} />
-        <Text style={[styles.biometricTitle, { color: theme.colors.text }]}>
-          Enable Biometric Login?
-        </Text>
-        <Text style={[styles.biometricSubtitle, { color: theme.colors.textSecondary }]}>
-          Use Face ID or Fingerprint for quick and secure access
-        </Text>
-        <View style={styles.biometricButtons}>
-          <Button
-            title="Enable"
-            onPress={() => {
-              setShowBiometricPrompt(false);
-              completeRegistration(true);
-            }}
-            style={styles.biometricButton}
-          />
-          <Button
-            title="Not Now"
-            onPress={() => {
-              setShowBiometricPrompt(false);
-              completeRegistration(false);
-            }}
-            variant="outline"
-            style={styles.biometricButton}
-          />
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={[styles.modal, { backgroundColor: theme.colors.background }]}>
+        <View style={[styles.biometricContent, { backgroundColor: theme.colors.surface }]}>
+          <Ionicons name="finger-print" size={64} color={theme.colors.primary} />
+          <Text style={[styles.biometricTitle, { color: theme.colors.text }]}>
+            Enable Biometric Login?
+          </Text>
+          <Text style={[styles.biometricSubtitle, { color: theme.colors.textSecondary }]}>
+            Use Face ID or Fingerprint for quick and secure access
+          </Text>
+          <View style={styles.biometricButtons}>
+            <Button
+              title="Enable"
+              onPress={() => {
+                setShowBiometricPrompt(false);
+                completeRegistration(true);
+              }}
+              style={styles.biometricButton}
+            />
+            <Button
+              title="Not Now"
+              onPress={() => {
+                setShowBiometricPrompt(false);
+                completeRegistration(false);
+              }}
+              variant="outline"
+              style={styles.biometricButton}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 
   if (showBiometricPrompt) {
@@ -188,3 +189,94 @@ export default function RegisterScreen() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  keyboardView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    padding: 24,
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    marginBottom: 32,
+    textAlign: 'center',
+  },
+  form: {
+    gap: 16,
+  },
+  input: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    fontSize: 16,
+  },
+  phoneContainer: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  countryCode: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    justifyContent: 'center',
+    minWidth: 100,
+  },
+  phoneInput: {
+    flex: 1,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    fontSize: 16,
+  },
+  registerButton: {
+    marginTop: 8,
+  },
+  modal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+  },
+  biometricContent: {
+    alignItems: 'center',
+    padding: 32,
+    borderRadius: 16,
+    maxWidth: 300,
+    width: '100%',
+  },
+  biometricTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 16,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  biometricSubtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 24,
+  },
+  biometricButtons: {
+    flexDirection: 'row',
+    gap: 12,
+    width: '100%',
+  },
+  biometricButton: {
+    flex: 1,
+  },
+});
